@@ -1,7 +1,7 @@
 # macos
 
 ## Runtime Environment
-First of all, we need to prepare [XEMU](https://github.com/lgblgblgb/xemu/) for our system. We build the *next* branch.
+First of all, you need to prepare [XEMU](https://github.com/lgblgblgb/xemu/) for our system. We build the *next* branch.
 
 ### Build XEMU
 You need the following software on your system:
@@ -22,4 +22,9 @@ Go to the branch next and verify the last commit:
 ```
 git checkout next
 git log -1
+```
+
+Build XEMU:
+```
+make
 ```
