@@ -1,6 +1,0 @@
-HEX ,DB7      ,DB6      ,DB5      ,DB4       ,DB3      ,DB2      ,DB1       ,DB0      ,DESC
-D000,S0X      ,S0X      ,S0X      ,S0X       ,S0X      ,S0X      ,S0X       ,S0X      ,S0X=sprite 0 horizontal position
-D011,RC8      ,ECM      ,BMM      ,BLNK      ,RSEL     ,YSCL     ,YSCL      ,YSCL     ,RC8=raster compare bit 8;ECM=extended background mode;BMM=bitmap mode;BLNK=diable display;RSEL=24/25 row select;YSCL=24/25 vertical smooth scroll
-D020,-        ,-        ,-        ,-         ,BORDERCOL,BORDERCOL,BORDERCOL,BORDERCOL ,BORDERCOL=display border colour (16 colour)
-D021,-        ,-        ,-        ,-         ,SCREENCOL,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL=screen color (16 colour)
-D030,ROME,    ,CROM9    ,ROMC     ,ROMA      ,ROM8     ,PAL      ,EXTSYNC,  CRAM2K    ,ROME=Map C65 ROM $E000,CROM9=Select between C64 and C65 charset,ROMC=Map C65 ROM $C000,ROMA=Map C65 ROM $A000,ROM8= Map C65 ROM $8000,PAL=Use PALETTE ROM (0) or RAM (1) entries for colours 0 - 15,EXTSYNC=Enable external video sync (genlock input),CRAM2K=Map 2nd KB of colour RAM $DC00-$DFFF

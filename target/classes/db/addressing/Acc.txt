@@ -1,6 +1,0 @@
-acc
-accumulator
-Accumulator
-In this mode, the Accumulator is the operand. This is typically used to shift, rotate or
-modify the value of the Accumulator Register in some way. For example, INC A incre-
-ments the value in the Accumulator Register.
