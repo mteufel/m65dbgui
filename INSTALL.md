@@ -32,4 +32,11 @@ After building you should find the executable in the folder `/XEMU/build/bin`. T
 
 
 ### Prepare folder structure to run XEMU and develop m65dbgui
-I recommend that you completely work in one folder with both, your complete XEMU installation and all resources you need to develop, run and build the m65dbgui software. Lets prepare this folder. Doing it this makes things much easier, because everything you need is kept in only on folder making it easier to transfer your environment between different systems or manage different configurations.
+I recommend that you completely work in one folder with both, your complete XEMU installation and all resources you need to develop, run and build the m65dbgui software. Lets prepare this folder. Doing it this way make things much easier, because everything you need is kept in only on folder. It is much easier to transfer your environment between different systems or manage different configurations.
+
+Create the folder structure with the following steps:
+- Create your root folder, for example `65`
+- inside that folder create a sub-folder `xemu-next`
+- inside `xemu-next` create another subfolder named `mega65`
+- copy the XEMU executable `xmega65.native` (see above) into the folder `xemu-next`
+- inside `xemu-next` a script with name `mega65.sh` which will be used later to start XEMU:
