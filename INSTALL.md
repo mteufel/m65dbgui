@@ -14,10 +14,12 @@ You need the following software on your system:
 
 
 First of all, you have to checkout XEMU:
-```git clone https://github.com/lgblgblgb/xemu.git
+```
+git clone https://github.com/lgblgblgb/xemu.git
 ```
 
 Go to the branch next and verify the last commit:
-```git checkout next
+```
+git checkout next
 git log -1
 ```
