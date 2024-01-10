@@ -1,0 +1,5 @@
+imp
+implied
+Implied
+In this mode, there are no operands, as the precise function of the instruction is implied
+by the instruction itself. For example, the INX instruction increments the X Register.

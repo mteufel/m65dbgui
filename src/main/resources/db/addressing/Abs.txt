@@ -1,0 +1,11 @@
+abs
+absolute
+Absolute Mode
+In this mode, the argument is an 16-bit address. The low 8-bits of the address are
+taken from the byte immediately following the instruction opcode. The upper 8-bits
+are taken from the byte following that. For example, the instruction
+
+LDA $1234
+
+would read the memory location $1234, and place the read value into the Accumu-
+lator Register. This would be encoded as $AD $34 $12.

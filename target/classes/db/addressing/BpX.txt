@@ -1,0 +1,16 @@
+bpX
+base-page,x
+Base-Page X-Indexed Mode
+This mode is identical to Base-Page Mode, except that the address is formed by taking
+the argument, and adding the value of the X Register to it. In 6502 mode, the result
+will always be in the Base-Page, that is, any carry due to the addition from the low
+byte into the high byte of the address will be ignored. The encoding for this addressing
+mode is identical to Base-Page Mode.
+The argument is encoded as a single byte that immediately follows the instruction
+opcode. For example,
+
+LDA $12 , X
+
+would read the value stored in location ($12 + X) in the Base-Page, and put it into the
+A register. The instruction byte stream for this would be $B5 $12.
+See the note on page H-5 for more information about Base-Page and Zero-Page.
