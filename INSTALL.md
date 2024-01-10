@@ -36,7 +36,12 @@ I recommend that you completely work in one folder with both, your complete XEMU
 
 Create the folder structure with the following steps:
 - Create your root folder, for example `65`
-- inside that folder create a sub-folder `xemu-next`
-- inside `xemu-next` create another subfolder named `mega65`
-- copy the XEMU executable `xmega65.native` (see above) into the folder `xemu-next`
-- inside `xemu-next` a script with name `mega65.sh` which will be used later to start XEMU:
+- Inside that folder create a sub-folder `xemu-next`
+- Inside `xemu-next` create another subfolder named `mega65`
+- Copy the XEMU executable `xmega65.native` (see above) into the folder `xemu-next`
+- Inside `xemu-next` a script with name `mega65.sh` which will be used later to start XEMU:
+```
+XEMU_HOME=/Users/ExampleUser/65/xemu-next
+$XEMU_HOME=/xmega65.native -besure -allowscanlines -showscanlines -sdlrenderquality 1 -uartmon :4510
+```
+- Change into the folder `mega65`. This folder holds all files e.g. ROM necessary to run XEMU
