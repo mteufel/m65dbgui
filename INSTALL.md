@@ -39,9 +39,13 @@ Create the folder structure with the following steps:
 - Inside that folder create a sub-folder `xemu-next`
 - Inside `xemu-next` create another subfolder named `mega65`
 - Copy the XEMU executable `xmega65.native` (see above) into the folder `xemu-next`
-- Inside `xemu-next` a script with name `mega65.sh` which will be used later to start XEMU:
+- Inside `xemu-next` create a script with name `mega65.sh` which will be used later to start XEMU:
 ```
 XEMU_HOME=/Users/ExampleUser/65/xemu-next
-$XEMU_HOME=/xmega65.native -besure -allowscanlines -showscanlines -sdlrenderquality 1 -uartmon :4510
+$XEMU_HOME/xmega65.native -besure -allowscanlines -showscanlines -sdlrenderquality 1 -uartmon :4510
 ```
 - Change into the folder `mega65`. This folder holds all files e.g. ROM necessary to run XEMU
+- Create an empty file named `prefdir-is-here.txt`. This file is important and makes sure that XEMU uses this folder for its configuration
+- Start XEMU with the `mega65.sh` script. XEMU is displaying a series of dialogs, which you can all commit. In the end of this process you should have the folder `mega65` (your personal XEMU configuration folder) initalized and filled with standard configuration files, also an empty SD-card-Image should have been created
+- The only thing missing now are valid ROMs, go and get these ROMs from the MEGA65 Filehost and put them into the folder `mega65`
+- Congratulations! Your XEMU instance from the *next* branch is up and running.
