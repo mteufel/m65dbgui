@@ -30,5 +30,6 @@ make
 ```
 After building you should find the executable in the folder `/XEMU/build/bin`. The file is named `xmega65.native`.
 
+
 ### Prepare folder structure to run XEMU and develop m65dbgui
-I recommend that you completely work in one folder with both, your complete XEMU installation and all resources you need to develop, run and build the m65dbgui software. Lets prepare thhis folder.
+I recommend that you completely work in one folder with both, your complete XEMU installation and all resources you need to develop, run and build the m65dbgui software. Lets prepare this folder. Doing it this makes things much easier, because everything you need is kept in only on folder making it easier to transfer your environment between different systems or manage different configurations.
