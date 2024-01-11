@@ -17,7 +17,7 @@ public class M65Registers implements  Operation {
     private String result1;
     private String result2;
     private String result3;
-
+    private String result4;
     private String pc;
     private String ar;
     private String xr;
@@ -49,6 +49,7 @@ public class M65Registers implements  Operation {
             result1 = reader.readLine();
             result2 = reader.readLine();
             result3 = reader.readLine();
+            result4 = reader.readLine();
             parse();
 
         } catch (Exception e) {
@@ -56,22 +57,23 @@ public class M65Registers implements  Operation {
             result1 = null;
             result2 = null;
             result3 = null;
+            result4 = null;
         }
     }
 
     private void parse() {
-        pc = result3.substring(0,4);
-        ar = result3.substring(5,7);
-        xr = result3.substring(8,10);
-        yr = result3.substring(11,13);
-        zr = result3.substring(14,16);
-        bp = result3.substring(17,19);
-        sp = result3.substring(20,24);
-        mapl = result3.substring(25,29);
-        maph = result3.substring(30,34);
-        lastOp = result3.substring(35,37);
-        sr = result3.substring(44,46);
-        unknown = result3.substring(47,49);
+        pc = result4.substring(0,4);
+        ar = result4.substring(5,7);
+        xr = result4.substring(8,10);
+        yr = result4.substring(11,13);
+        zr = result4.substring(14,16);
+        bp = result4.substring(17,19);
+        sp = result4.substring(20,24);
+        mapl = result4.substring(25,29);
+        maph = result4.substring(30,34);
+        lastOp = result4.substring(35,37);
+        sr = result4.substring(44,46);
+        unknown = result4.substring(47,49);
 
         n = checkFlag(50);
         v = checkFlag(51);
@@ -85,7 +87,7 @@ public class M65Registers implements  Operation {
     }
 
     private boolean checkFlag(int index) {
-        if (result3.substring(index,index+1).equals("-")) {
+        if (result4.substring(index,index+1).equals("-")) {
             return false;
         }
         return true;
@@ -97,6 +99,7 @@ public class M65Registers implements  Operation {
         //result = result + result1 + "\n";  -- contains just the command, so we dont need to get it back here
         result = result + result2 + "\n";
         result = result + result3 + "\n";
+        result = result + result4 + "\n";
         result = result + "\n";
         return result;
     }
@@ -186,7 +189,7 @@ public class M65Registers implements  Operation {
     }
 
     public boolean isEmpty() {
-        if (result3 == null)
+        if (result4 == null)
             return true;
         return false;
     }

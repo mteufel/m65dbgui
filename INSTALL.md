@@ -46,11 +46,15 @@ $XEMU_HOME/xmega65.native -besure -allowscanlines -showscanlines -sdlrenderquali
 ```
 - Change into the folder `mega65`. This folder holds all files e.g. ROM necessary to run XEMU
 - Create an empty file named `prefdir-is-here.txt`. This file is important and makes sure that XEMU uses this folder for its configuration
-- Start XEMU with the `mega65.sh` script. XEMU is displaying a series of dialogs, which you can all commit. In the end of this process you should have the folder `mega65` (your personal XEMU configuration folder) initalized and filled with standard configuration files, also an empty SD-card-Image should have been created.
-- The only thing missing now are valid ROMs, go and get these ROMs from the MEGA65 Filehost and put them into the folder `mega65`. You need the files CHARROM.M65 and MEGA65.ROM.
+- Start XEMU with the `mega65.sh` script. XEMU is displaying a series of dialogs, which you can all commit. In the end of this process you should have the folder `mega65` (your personal XEMU configuration folder) initalized and filled with standard configuration files.
+- The only thing missing now are valid ROMs, go and get these ROMs from the MEGA65 Filehost and use XEMUs assistant to create an SD-card and add the ROM.
 - Congratulations! Your XEMU instance from the *next* branch is up and running.
 
 ## Development Environment
 Before we can develop and run *m65dbgui* you need to prepare your system to develop with *Java* and *Maven*.
 
 ### Install Java and Maven
+
+-Download a Java JDK suitable for your system, I recommend to use the Jetbrain Runtime [JBR from here](https://github.com/JetBrains/JetBrainsRuntime/releases/tag/jbr-release-17.0.9b1087.7)
+-It is better to *not* download any installer, better go and get a *tar.gz* or a *zip* which is much better to handle
+-Inside `65` create another subfolder named `jdk`. Extract JBR here.

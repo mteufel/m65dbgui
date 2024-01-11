@@ -58,35 +58,44 @@ public class RegistersPanel extends JPanel implements Receiver {
             if (m65Registers.isEmpty())
                 return;
 
-            String registerContent = "1111 22 33 44 55 66 7777 8888 9999 AA EEE   BB CC DDDDDDDD";
-            registerContent = registerContent.replaceAll("1111", m65Registers.getPc());
-            registerContent = registerContent.replaceAll("22", m65Registers.getAr());
-            registerContent = registerContent.replaceAll("33", m65Registers.getXr());
-            registerContent = registerContent.replaceAll("44", m65Registers.getYr());
-            registerContent = registerContent.replaceAll("55", m65Registers.getZr());
-            registerContent = registerContent.replaceAll("66", m65Registers.getBp());
-            registerContent = registerContent.replaceAll("7777", m65Registers.getSp());
-            registerContent = registerContent.replaceAll("8888", m65Registers.getMapl());
-            registerContent = registerContent.replaceAll("9999", m65Registers.getMaph());
-            registerContent = registerContent.replaceAll("AA", m65Registers.getLastOp());
-            registerContent = registerContent.replaceAll("BB", m65Registers.getUnknown());
-            registerContent = registerContent.replaceAll("CC", m65Registers.getSr());
 
-            String flags = "";
-            flags = flags + m65Registers.toNumeralString(m65Registers.isN());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isV());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isE());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isB());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isD());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isI());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isZ());
-            flags = flags + m65Registers.toNumeralString(m65Registers.isC());
-            registerContent = registerContent.replaceAll("DDDDDDDD", flags);
+            SwingUtilities.invokeLater( () -> {
 
-            registerContent = registerContent.replaceAll("EEE", opcodeService.getOpcodeByCode(m65Registers.getLastOp()).getInstruction());
 
-            registerTitleLabel.setText(m65Registers.getRegisterTitle());
-            registerDataLabel.setText(registerContent);
+                String registerContent = "1111 22 33 44 55 66 7777 8888 9999 AA EEE   BB CC DDDDDDDD";
+                registerContent = registerContent.replaceAll("1111", m65Registers.getPc());
+                registerContent = registerContent.replaceAll("22", m65Registers.getAr());
+                registerContent = registerContent.replaceAll("33", m65Registers.getXr());
+                registerContent = registerContent.replaceAll("44", m65Registers.getYr());
+                registerContent = registerContent.replaceAll("55", m65Registers.getZr());
+                registerContent = registerContent.replaceAll("66", m65Registers.getBp());
+                registerContent = registerContent.replaceAll("7777", m65Registers.getSp());
+                registerContent = registerContent.replaceAll("8888", m65Registers.getMapl());
+                registerContent = registerContent.replaceAll("9999", m65Registers.getMaph());
+                registerContent = registerContent.replaceAll("AA", m65Registers.getLastOp());
+                registerContent = registerContent.replaceAll("BB", m65Registers.getUnknown());
+                registerContent = registerContent.replaceAll("CC", m65Registers.getSr());
+
+                String flags = "";
+                flags = flags + m65Registers.toNumeralString(m65Registers.isN());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isV());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isE());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isB());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isD());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isI());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isZ());
+                flags = flags + m65Registers.toNumeralString(m65Registers.isC());
+                registerContent = registerContent.replaceAll("DDDDDDDD", flags);
+
+                registerContent = registerContent.replaceAll("EEE", opcodeService.getOpcodeByCode(m65Registers.getLastOp()).getInstruction());
+
+
+                registerTitleLabel.setText(m65Registers.getRegisterTitle());
+                registerDataLabel.setText(registerContent);
+                updateUI();
+
+            });
+
 
             // refresh Mapping, this event will be catched in MemoryService which holds a Method
             // to get the actual Mapping
