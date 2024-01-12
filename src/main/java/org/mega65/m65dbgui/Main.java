@@ -23,6 +23,7 @@ public class Main {
                 // enable custom window decorations
                 JFrame.setDefaultLookAndFeelDecorated( true );
                 JDialog.setDefaultLookAndFeelDecorated( true );
+
             }
 
             MainFrame mainFrame = (MainFrame) create(MainFrame.class);

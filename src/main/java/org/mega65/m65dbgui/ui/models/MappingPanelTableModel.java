@@ -10,6 +10,7 @@ import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MappingPanelTableModel implements TableModel {
 
     List<Mapping> data = new ArrayList<>();

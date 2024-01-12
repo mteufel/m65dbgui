@@ -4,6 +4,7 @@ public class OpenViewEvent {
 
     public static String TYPE_DISASSEMBLY = "disassembly";
     public static String TYPE_MAPPING = "mapping";
+    public static String TYPE_REGISTERS_DETAIL = "registersDetail";
 
     String data;
     String type;

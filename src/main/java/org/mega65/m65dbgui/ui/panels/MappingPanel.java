@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 
 import javax.swing.*;
 
+
 @Singleton
 public class MappingPanel extends JPanel {
 

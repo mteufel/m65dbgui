@@ -47,25 +47,50 @@ public class MainPanel extends JPanel {
             m65Memory.setAdr(0x2015);
             UiUtil.createClosableTab(title, new JScrollPane(disassemblyTable), mainTabbedPane, null);
             state.executeOperation(m65Memory);
-         }
-        if (event.getType().equals(OpenViewEvent.TYPE_MAPPING) && !isMappingPaneOpen()) {
-            title = "Mapping";
+        }
+        title = "Mapping";
+        if (event.getType().equals(OpenViewEvent.TYPE_MAPPING) && !isTabOpen(title)) {
+
             MappingPanel mappingPanel = (MappingPanel) DiUtil.create(MappingPanel.class);
             UiUtil.createClosableTab(title, mappingPanel, mainTabbedPane, null);
             DiUtil.fireEvent(new GenericEvent(GenericEvent.GENERIC_EVENT_MAPPING_HAS_BEEN_REFRESHED));
+            activateTab(title);
         }
+        title = "Lookup Registers";
+        if (event.getType().equals(OpenViewEvent.TYPE_REGISTERS_DETAIL)  && !isTabOpen(title)) {
+            RegistersDetailPanel registersDetailPanel = (RegistersDetailPanel) DiUtil.create(RegistersDetailPanel.class);
+            UiUtil.createClosableTab(title, registersDetailPanel, mainTabbedPane, null);
+            activateTab(title);
+        }
+
+
 
     }
 
-    public boolean isMappingPaneOpen() {
+    public boolean isTabOpen(String title) {
         int totalTabs = mainTabbedPane.getTabCount();
         for(int i = 0; i < totalTabs; i++)
         {
-            if (mainTabbedPane.getTabComponentAt(i) instanceof MappingPanel)  {
-                return true;
+            String tabTitle = mainTabbedPane.getTitleAt(i);
+            if (tabTitle.equals(title)) {
+               return true;
             }
         }
         return false;
     }
+
+    public void activateTab(String title) {
+        int totalTabs = mainTabbedPane.getTabCount();
+        for(int i = 0; i < totalTabs; i++)
+        {
+            String tabTitle = mainTabbedPane.getTitleAt(i);
+            if (tabTitle.equals(title)) {
+                mainTabbedPane.setSelectedIndex(i);
+            }
+        }
+
+    }
+
+
 
 }
