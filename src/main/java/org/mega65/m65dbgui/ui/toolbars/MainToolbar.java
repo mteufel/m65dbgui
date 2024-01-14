@@ -65,7 +65,7 @@ public class MainToolbar extends JToolBar {
             menuItemDisassembly.addActionListener(addDisassemblyActionListener);
             menu.add(menuItemDisassembly);
 
-            JMenuItem menuItemRegister = new JMenuItem("Registers");
+            JMenuItem menuItemRegister = new JMenuItem("Registers Lookup");
             menuItemRegister.setIcon(iconService.getToolbarIcon("registers.svg"));
             menuItemRegister.addActionListener(openRegisterDetailPanelActionListener);
             menu.add(menuItemRegister);

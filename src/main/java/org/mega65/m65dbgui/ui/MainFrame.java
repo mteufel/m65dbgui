@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
             setTitle(null);
         }
 
-        setSize(1380,1000);
+        setSize(1420,1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 

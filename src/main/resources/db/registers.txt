@@ -1,7 +1,66 @@
-HEX ,DB7      ,DB6      ,DB5      ,DB4       ,DB3      ,DB2      ,DB1       ,DB0      ,DESC
-0001,-        ,-        ,CASM     ,CASS      ,CASSD    ,CHAREN   ,HIRAM     ,LORAM    ,LORAM=Selects ROM or RAM at 40960 ($A000): 1->BASIC 0->RAM;HIRAM=Selects ROM or RAM at 57344 ($E000): 1->Kernal 0->RAM;CHAREN=Selects character ROM or I/O devices: 1->I/O  0->RAM;CASSD=Cassette Data Output line;CASSS=Cassette Switch Sense: 0->Button pressed 1->not pressed;CASM=Cassette Motor Control: 1->Motor on  0->Motor off
-D000,S0X      ,S0X      ,S0X      ,S0X       ,S0X      ,S0X      ,S0X       ,S0X      ,S0X=sprite 0 horizontal position
-D011,RC8      ,ECM      ,BMM      ,BLNK      ,RSEL     ,YSCL     ,YSCL      ,YSCL     ,RC8=raster compare bit 8;ECM=extended background mode;BMM=bitmap mode;BLNK=diable display;RSEL=24/25 row select;YSCL=24/25 vertical smooth scroll
-D020,A        ,B        ,C        ,D         ,BORDERCOLA,BORDERCOLB,BORDERCOLC,BORDERCOLD ,BORDERCOL=display border colour (16 colour);A=a;B=dfsdfsdfd;C=dfsdf
-D021,-        ,-        ,-        ,-         ,SCREENCOL,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL=screen color (16 colour)
-D030,ROME     ,CROM9    ,ROMC     ,ROMA      ,ROM8     ,PAL      ,EXTSYNC,  CRAM2K    ,ROME=Map C65 ROM $E000;CROM9=Select between C64 and C65 charset;ROMC=Map C65 ROM $C000;ROMA=Map C65 ROM $A000;ROM8=Map C65 ROM $8000;PAL=Use PALETTE ROM (0) or RAM (1) entries for colours 0 - 15;EXTSYNC=Enable external video sync (genlock input);CRAM2K=Map 2nd KB of colour RAM $DC00-$DFFF
+TYPE   ,HEX ,DB7      ,DB6      ,DB5      ,DB4       ,DB3      ,DB2      ,DB1       ,DB0      ,DESC
+; ----------------------------------
+; General C64 Registers
+; ---------------------------------
+GENERAL,0001,-        ,-        ,CASM     ,CASS      ,CASSD    ,CHAREN   ,HIRAM     ,LORAM    ,LORAM=Selects ROM or RAM at 40960 ($A000-$BFFF): 1->BASIC 0->RAM;HIRAM=Selects ROM or RAM at 57344 ($E000-$FFFF): 1->Kernal 0->RAM;CHAREN=Selects character ROM or I/O devices: 1->I/O  0->RAM;CASSD=Cassette Data Output line;CASSS=Cassette Switch Sense: 0->Button pressed 1->not pressed;CASM=Cassette Motor Control: 1->Motor on  0->Motor off
+; ----------------------------------
+; VIC-II C64 Registers
+; ---------------------------------
+VIC-II ,D000,S0X      ,S0X      ,S0X      ,S0X       ,S0X      ,S0X      ,S0X       ,S0X      ,S0X=sprite 0 horizontal position
+VIC-II ,D001,S0Y      ,S0Y      ,S0Y      ,S0Y       ,S0Y      ,S0Y      ,S0Y       ,S0Y      ,S0X=sprite 0 vertical position
+VIC-II ,D002,S0X      ,S1X      ,S1X      ,S1X       ,S1X      ,S1X      ,S1X       ,S1X      ,S1X=sprite 1 horizontal position
+VIC-II ,D003,S0Y      ,S1Y      ,S1Y      ,S1Y       ,S1Y      ,S1Y      ,S1Y       ,S1Y      ,S1X=sprite 1 vertical position
+VIC-II ,D004,S0X      ,S2X      ,S2X      ,S2X       ,S2X      ,S2X      ,S2X       ,S2X      ,S2X=sprite 2 horizontal position
+VIC-II ,D005,S0Y      ,S2Y      ,S2Y      ,S2Y       ,S2Y      ,S2Y      ,S2Y       ,S2Y      ,S2X=sprite 2 vertical position
+VIC-II ,D006,S0X      ,S3X      ,S3X      ,S3X       ,S3X      ,S3X      ,S3X       ,S3X      ,S3X=sprite 3 horizontal position
+VIC-II ,D007,S0Y      ,S3Y      ,S3Y      ,S3Y       ,S3Y      ,S3Y      ,S3Y       ,S3Y      ,S30X=sprite 3 vertical position
+VIC-II ,D008,S0X      ,S4X      ,S4X      ,S4X       ,S4X      ,S4X      ,S4X       ,S4X      ,S4X=sprite 4 horizontal position
+VIC-II ,D009,S0Y      ,S4Y      ,S4Y      ,S4Y       ,S4Y      ,S4Y      ,S4Y       ,S4Y      ,S4X=sprite 4 vertical position
+VIC-II ,D00A,S0X      ,S5X      ,S5X      ,S5X       ,S5X      ,S5X      ,S5X       ,S5X      ,S5X=sprite 5 horizontal position
+VIC-II ,D00B,S0Y      ,S5Y      ,S5Y      ,S5Y       ,S5Y      ,S5Y      ,S5Y       ,S5Y      ,S5X=sprite 5 vertical position
+VIC-II ,D00C,S0X      ,S6X      ,S6X      ,S6X       ,S6X      ,S6X      ,S6X       ,S6X      ,S6X=sprite 6 horizontal position
+VIC-II ,D00D,S0Y      ,S6Y      ,S6Y      ,S6Y       ,S6Y      ,S6Y      ,S6Y       ,S6Y      ,S6X=sprite 6 vertical position
+VIC-II ,D00E,S0X      ,S7X      ,S7X      ,S7X       ,S7X      ,S7X      ,S7X       ,S7X      ,S7X=sprite 7 horizontal position
+VIC-II ,D00F,S0Y      ,S7Y      ,S7Y      ,S7Y       ,S7Y      ,S7Y      ,S7Y       ,S7Y      ,S7X=sprite 7 vertical position
+VIC-II ,D010,SXMSB    ,SXMSB    ,SXMSB    ,SXMSB     ,SXMSB    ,SXMSB    ,SXMSB     ,SXMSB    ,SXMSB=sprite horizontal position MSBs
+VIC-II ,D011,RC8      ,ECM      ,BMM      ,BLNK      ,RSEL     ,YSCL     ,YSCL      ,YSCL     ,RC8=raster compare bit 8;ECM=extended background mode;BMM=bitmap mode;BLNK=diable display;RSEL=24/25 row select;YSCL=24/25 vertical smooth scroll
+VIC-II ,D012,RC       ,RC       ,RC       ,RC        ,RC       ,RC       ,RC        ,RC       ,RC=raster compare bits 0 to 7
+VIC-II ,D013,LPX      ,LPX      ,LPX      ,LPX       ,LPX      ,LPX      ,LPX       ,LPX      ,LPX=Coarse horizontal beam position (was lightpen X)
+VIC-II ,D014,LPY      ,LPY      ,LPY      ,LPY       ,LPY      ,LPY      ,LPY       ,LPY      ,LPY=Coarse vertical beam position (was lightpen Y)
+VIC-II ,D015,SE       ,SE       ,SE       ,SE        ,SE       ,SE       ,SE        ,SE       ,SE=sprite enable bits
+VIC-II ,D016,-        ,-        ,RST      ,MCM       ,CSEL     ,XSCL     ,XSCL      ,XSCL     ,RST=Disables video output on MAX Machine(tm) VIC-II 6566. Ignored on normal C64s and the MEGA65;MCM=Multi-colour mode;CSEL=38/40 column select;XSCL=horizontal smooth scroll
+VIC-II ,D017,SEXY     ,SEXY     ,SEXY     ,SEXY      ,SEXY     ,SEXY     ,SEXY      ,SEXY     ,SEXY=sprite vertical expansion enable bits
+VIC-II ,D018,VS       ,VS       ,VS       ,VS        ,CB       ,CB       ,CB        ,-        ,VS=screen address (x 1KiB);CB=character set address location (x 1KiB)
+VIC-II ,D019,-        ,-        ,-        ,-         ,ILP      ,ISSC     ,ISBC      ,RIRQ     ,ILP=light pen indicate or acknowledge;ISBC=sprite:bitmap collision indicate or acknowledge;RIRQ=raster compare indicate or acknowledge
+VIC-II ,D01A,-        ,-        ,-        ,-         ,-        ,MISSC    ,MISBC     ,MRIRQ    ,MISSC=mask sprite:sprite collision IRQ;MISBC=mask sprite:bitmap collision IRQ;MRIRQ=mask raster IRQ
+VIC-II ,D01B,BSP      ,BSP      ,BSP      ,BSP       ,BSP      ,BSP      ,BSP       ,BSP      ,BSP=sprite background priority bits
+VIC-II ,D01C,SCM      ,SCM      ,SCM      ,SCM       ,SCM      ,SCM      ,SCM       ,SCM      ,SE=sprite multicolour enable bits
+VIC-II ,D01D,SEXX     ,SEXX     ,SEXX     ,SEXX      ,SEXX     ,SEXX     ,SEXX      ,SEXX     ,SEXX=sprite horizontal expansion enable bits
+VIC-II ,D01E,SSC      ,SSC      ,SSC      ,SSC       ,SSC      ,SSC      ,SSC       ,SSC      ,SSC=sprite/sprite collision indicate bits
+VIC-II ,D01F,SBC      ,SBC      ,SBC      ,SBC       ,SBC      ,SBC      ,SBC       ,SBC      ,SBC=sprite/foreground collision indicate bits
+VIC-II ,D020,-        ,-        ,-        ,-         ,BORDERCOL,BORDERCOL,BORDERCOL ,BORDERCOL ,BORDERCOL=display border colour (16 colour)
+VIC-II ,D021,-        ,-        ,-        ,-         ,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL ,SCREENCOL=screen color (16 colour)
+VIC-II ,D022,-        ,-        ,-        ,-         ,MC1      ,MC1      ,MC1       ,MC1      ,MC1=multi-colour 1 (16 colour)
+VIC-II ,D023,-        ,-        ,-        ,-         ,MC2      ,MC2      ,MC2       ,MC2      ,MC2=multi-colour 2 (16 colour)
+VIC-II ,D024,-        ,-        ,-        ,-         ,MC3      ,MC3      ,MC3       ,MC3      ,MC3=multi-colour 3 (16 colour)
+VIC-II ,D025,SPRMC0   ,SPRMC0   ,SPRMC0   ,SPRMC0    ,SPRMC0   ,SPRMC0   ,SPRMC0    ,SPRMC0   ,SPRMC0=Sprite multi-colour 0
+VIC-II ,D026,SPRMC1   ,SPRMC1   ,SPRMC1   ,SPRMC1    ,SPRMC1   ,SPRMC1   ,SPRMC1    ,SPRMC1   ,SPRMC1=Sprite multi-colour 1
+VIC-II ,D027,SPR0COL  ,SPR0COL  ,SPR0COL  ,SPR0COL   ,SPR0COL  ,SPR0COL  ,SPR0COL   ,SPR0COL  ,SPR0COL=sprite 0 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D028,SPR1COL  ,SPR1COL  ,SPR1COL  ,SPR1COL   ,SPR1COL  ,SPR1COL  ,SPR1COL   ,SPR1COL  ,SPR1COL=sprite 1 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D029,SPR0COL  ,SPR2COL  ,SPR2COL  ,SPR2COL   ,SPR2COL  ,SPR2COL  ,SPR2COL   ,SPR2COL  ,SPR2COL=sprite 2 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D02A,SPR0COL  ,SPR3COL  ,SPR3COL  ,SPR3COL   ,SPR3COL  ,SPR3COL  ,SPR3COL   ,SPR3COL  ,SPR3COL=sprite 3 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D02B,SPR0COL  ,SPR4COL  ,SPR4COL  ,SPR4COL   ,SPR4COL  ,SPR4COL  ,SPR4COL   ,SPR4COL  ,SPR4COL=sprite 4 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D02C,SPR0COL  ,SPR5COL  ,SPR5COL  ,SPR5COL   ,SPR5COL  ,SPR5COL  ,SPR5COL   ,SPR5COL  ,SPR5COL=sprite 5 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D02D,SPR6COL  ,SPR6COL  ,SPR6COL  ,SPR6COL   ,SPR6COL  ,SPR6COL  ,SPR6COL   ,SPR6COL  ,SPR6COL=sprite 6 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D02E,SPR7COL  ,SPR7COL  ,SPR7COL  ,SPR7COL   ,SPR7COL  ,SPR7COL  ,SPR7COL   ,SPR7COL  ,SPR7COL=sprite 7 colour / 16-colour sprite transparency colour (lower nybl)
+VIC-II ,D030,-        ,-        ,-        ,-         ,-        ,-        ,-         ,C128FAST, C128FAST=2MHz select (for C128 2MHz emulation)
+; ----------------------------------
+; VIC-III C65 Registers
+; ---------------------------------
+VIC-III,D020,BORDERCOL,BORDERCOL,BORDERCOL,BORDERCOL ,BORDERCOL,BORDERCOL,BORDERCOL ,BORDERCOL ,BORDERCOL=display border colour (256 colour)
+VIC-III,D021,SCREENCOL,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL ,SCREENCOL=screen colour (256 colour)
+VIC-III,D030,ROME     ,CROM9    ,ROMC     ,ROMA      ,ROM8     ,PAL      ,EXTSYNC   ,CRAM2K   ,ROME=Map53272 C65 ROM $E000-$FFFF;CROM9=Select between C64 and C65 charset;ROMC=Map C65 ROM $C000-$CFFF;ROMA=Map C65 ROM $A000-$BFFF;ROM8=Map C65 ROM $8000-$9FFF;PAL=Use PALETTE ROM (0) or RAM (1) entries for colours 0 - 15;EXTSYNC=Enable external video sync (genlock input);CRAM2K=Map 2nd KB of colour RAM $DC00-$DFFF
+; ----------------------------------
+; VIC-IV MEGA65 Registers
+; ---------------------------------
+VIC-IV ,D049,SPRBPMEN ,SPRBPMEN ,SPRBPMEN ,SPRBPMEN  ,TBDRPOS  ,TBDRPOS  ,TBDRPOS   ,TBDRPOS  ,SPRBPMEN=Sprite bitplane-modify-mode enables;TBDRPOS=top border position

@@ -26,8 +26,11 @@ public class MemoryService {
 
     @Inject State state;
     @Inject AdressspaceService adressspaceService;
+    @Inject RegistersService registersService;
     String mapl = "";
     String maph = "";
+    long valueD031 = 0;
+    long value01 = 0;
     List<Mapping> mapping;
     Logger logger = Util.getLogger(MemoryService.class);
 
@@ -54,6 +57,9 @@ public class MemoryService {
         DiUtil.fireEvent(store);
     }
 
+    public long peek(String addr) {
+        return peek(Util.fromHex(addr));
+    }
     public long peek(long addr) {
         M65Memory memory = new M65Memory();
         memory.setAdr(addr);
@@ -72,16 +78,44 @@ public class MemoryService {
         return mapping;
     }
 
+
+    private boolean isAdrMapped(long addr) {
+        for (Mapping m : this.mapping) {
+            if (addr >= m.startAdr() && addr <= m.endAdr()-1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void addSpecialRegisterMapping(String mappingType, String adr, int dataBit, Long value, int length) {
+        if (  isAdrMapped(Util.fromHex(adr)) == false && registersService.checkBit(dataBit, value)   ) {
+            long adrStart = Util.fromHex(adr);
+            long adrEnd = adrStart + length;
+            long offset = 131072;
+            long source = adrStart + offset;
+            Adressspace adrsp = adressspaceService.getAdressspaceByAdr(source);
+            mapping.add(new Mapping(mappingType, adrsp.available(), adrsp.description(), adrStart, adrEnd, offset, source));
+        }
+    }
+
+
     private void initMapping(String mappingType, String data) {
 
         long start; // 0=MAPL  32768=MAPH
 
         switch (mappingType) {
             case Mapping.MAPPING_TYPE_D030:
-                logger.info("$D030 Mapping");
+                Long valueInD031 = peek("777D030");
+                addSpecialRegisterMapping(mappingType, "E000", RegistersService.DB7, valueInD031, 8192);
+                addSpecialRegisterMapping(mappingType, "C000", RegistersService.DB5, valueInD031, 4096);
+                addSpecialRegisterMapping(mappingType, "A000", RegistersService.DB4, valueInD031, 8192);
+                addSpecialRegisterMapping(mappingType, "8000", RegistersService.DB3, valueInD031, 8192);
                 break;
             case Mapping.MAPPING_TYPE_01:
-                logger.info("$01 Mapping");
+                Long valueIn01 = peek("7770001");
+                addSpecialRegisterMapping(mappingType, "E000", RegistersService.DB1, valueIn01, 8192);
+                addSpecialRegisterMapping(mappingType, "A000", RegistersService.DB0, valueIn01, 8192);
                 break;
             case Mapping.MAPPING_TYPE_MAPL:
             case Mapping.MAPPING_TYPE_MAPH:
@@ -106,9 +140,8 @@ public class MemoryService {
                         long adrEnd = adrStart + 8192;
                         long offset = Util.fromHex(last);
                         long source = adrStart + offset;
-                        long pos = start+index;
                         Adressspace adr = adressspaceService.getAdressspaceByAdr(source);
-                        mapping.add(new Mapping(mappingType, adr.available(), adr.description(), adrStart, adrEnd, offset, source, pos));
+                        mapping.add(new Mapping(mappingType, adr.available(), adr.description(), adrStart, adrEnd, offset, source));
                     }
                 }));
         }
@@ -120,16 +153,42 @@ public class MemoryService {
     public void onGenericEvent(@Observes GenericEvent event) {
         if (event.getEvent().equals(GenericEvent.GENERIC_EVENT_MAPPING_REFRESH)) {
             M65Registers registers = (M65Registers) event.getData();
+            boolean refreshMapping = false;
             if (!mapl.equals(registers.getMapl()) || !maph.equals(registers.getMaph())) {
-                logger.info("onGenericEvent Prio 1");
                 this.mapl = registers.getMapl();
                 this.maph = registers.getMaph();
+                refreshMapping = true;
+            }
+
+            if (valueD031 != peek("777D031") ) {
+                this.valueD031 = peek("777D031");
+                refreshMapping = true;
+            }
+
+            if (value01 != peek("7770001") ) {
+                this.value01 = peek("7770001");
+                refreshMapping = true;
+            }
+
+            if (refreshMapping) {
 
                 mapping = new ArrayList<>();
+
+                // Prio 1 MAPL/MAPH
                 initMapping(Mapping.MAPPING_TYPE_MAPL, registers.getMapl());
                 initMapping(Mapping.MAPPING_TYPE_MAPH, registers.getMaph());
 
-                mapping.forEach( m -> logger.info(m.toString()));
+                // Prio 2 $D030
+                initMapping(Mapping.MAPPING_TYPE_D030, "");
+
+                // Prio 3 $01
+                initMapping(Mapping.MAPPING_TYPE_01, "");
+
+                List<Mapping> sortedMapping = mapping.stream()
+                        .sorted(Comparator.comparingLong(Mapping::startAdr))
+                        .collect(Collectors.toList());
+
+                mapping = sortedMapping;
                 DiUtil.fireEvent(new GenericEvent((GenericEvent.GENERIC_EVENT_MAPPING_HAS_BEEN_REFRESHED)));
 
             }

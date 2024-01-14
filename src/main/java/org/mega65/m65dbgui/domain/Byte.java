@@ -26,6 +26,9 @@ public class Byte {
     public static Byte parseByte(String addr, String value) {
         return new Byte(Util.fromHex(addr), Long.parseLong(value, 16 ));
     }
+    public static Byte parseByte(String addr, long value) {
+        return new Byte(Util.fromHex(addr), value);
+    }
     public static Byte parseByte(long addr, long value) {
         return new Byte(addr, value);
     }

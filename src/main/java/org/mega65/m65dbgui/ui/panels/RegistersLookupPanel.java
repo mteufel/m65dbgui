@@ -1,9 +1,7 @@
 package org.mega65.m65dbgui.ui.panels;
 
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 import org.mega65.m65dbgui.domain.Register;
-import org.mega65.m65dbgui.services.FontService;
 import org.mega65.m65dbgui.services.MemoryService;
 import org.mega65.m65dbgui.services.RegistersService;
 import org.mega65.m65dbgui.ui.controls.RegisterLabel;
@@ -15,27 +13,27 @@ import org.slf4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
-public class RegistersDetailPanel extends JPanel {
+public class RegistersLookupPanel extends JPanel {
 
     RegisterLabel labelValue;
     JCheckBox checkCpuContext;
-    JCheckBox checkAutomaticRefresh;
     JTable descriptionTable;
     RegisterDescriptionModel registerDescriptionModel;
     JTextPane paneRegisterDetails;
     JTextField textRegister;
     MemoryService memoryService;
     RegistersService registersService;
-    Logger logger = Util.getLogger(RegistersDetailPanel.class);
+    Logger logger = Util.getLogger(RegistersLookupPanel.class);
+    String vicFilter = "";
 
     @Inject
-    public RegistersDetailPanel(RegisterDescriptionModel registerDescriptionModel, RegisterLabel labelValue, MemoryService memoryService, RegistersService registersService) {
+    public RegistersLookupPanel(RegisterDescriptionModel registerDescriptionModel, RegisterLabel labelValue, MemoryService memoryService, RegistersService registersService) {
         this.memoryService = memoryService;
         this.registerDescriptionModel = registerDescriptionModel;
         this.labelValue = labelValue;
@@ -52,21 +50,33 @@ public class RegistersDetailPanel extends JPanel {
      private void createPanel() {
 
 
-        //BorderLayout borderLayout = new BorderLayout();
-        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        //setBackground(ColorHolder.getColor(ColorHolder.blue));
-        //setOpaque(true);
 
-        //JPanel parent = new JPanel();
-        //parent.setBackground(ColorHolder.getColor(ColorHolder.blue));
-        //parent.setOpaque(true);
         textRegister = new JTextField("");
         JButton buttonSearch = new JButton("...");
         labelValue.setForeground(ColorHolder.getColor(ColorHolder.purple));
+
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.X_AXIS));
         checkCpuContext = new JCheckBox("CPU Context");
         checkCpuContext.setSelected(true);
-        checkAutomaticRefresh = new JCheckBox("Auto-Refresh");
-        checkAutomaticRefresh.setSelected(true);
+        optionsPanel.add(checkCpuContext);
+        optionsPanel.add(new JLabel("        "));
+
+        JRadioButton radioVic2 = new JRadioButton(" VIC-II  ");
+        JRadioButton radioVic3 = new JRadioButton(" VIC-III  ");
+        JRadioButton radioVic4 = new JRadioButton(" VIC-IV  ");
+        radioVic2.addActionListener(new VicSelectionActionListener());
+        radioVic3.addActionListener(new VicSelectionActionListener());
+        radioVic4.addActionListener(new VicSelectionActionListener());
+        ButtonGroup vicGroup = new ButtonGroup();
+        vicGroup.add(radioVic2);
+        vicGroup.add(radioVic3);
+        vicGroup.add(radioVic4);
+        optionsPanel.add(radioVic2);
+        optionsPanel.add(radioVic3);
+        optionsPanel.add(radioVic4);
+
+
 
         paneRegisterDetails = new JTextPane();
         paneRegisterDetails.setContentType("text/html");
@@ -103,33 +113,25 @@ public class RegistersDetailPanel extends JPanel {
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbl.setConstraints(checkCpuContext, gbc);
-        add(checkCpuContext);
+        gbl.setConstraints(optionsPanel, gbc);
+        add(optionsPanel);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbl.setConstraints(checkAutomaticRefresh, gbc);
-        add(checkAutomaticRefresh);
-
-
-        gbc.gridx = 0;
-        gbc.gridy =  3;
+        gbc.gridy =  2;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbl.setConstraints(labelValue, gbc);
         add(labelValue);
 
         gbc.gridx = 0;
-        gbc.gridy =  4;
+        gbc.gridy =  3;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbl.setConstraints(paneRegisterDetails, gbc);
         add(paneRegisterDetails);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbl.setConstraints(scrollPane, gbc);
@@ -140,7 +142,7 @@ public class RegistersDetailPanel extends JPanel {
         JLabel dummy = new JLabel("");
         gbc.weighty = 1;
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbl.setConstraints(dummy, gbc);
@@ -151,10 +153,15 @@ public class RegistersDetailPanel extends JPanel {
         descriptionTable.setFocusable(false);
         descriptionTable.setRowSelectionAllowed(false);
         UiUtil.setColumnWidths(descriptionTable,50,120,800);
-         ((DefaultTableCellRenderer)descriptionTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
-         descriptionTable.setDefaultRenderer(Long.class, new ValueRenderer());
+        ((DefaultTableCellRenderer)descriptionTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
+        descriptionTable.setDefaultRenderer(Long.class, new ValueRenderer());
 
-         descriptionTable.updateUI();
+        radioVic4.setSelected(true);
+        this.vicFilter = "VIC-IV";
+        registersService.loadRegistersVic4();
+
+
+        descriptionTable.updateUI();
 
         textRegister.addKeyListener(new KeyAdapter() {
             @Override
@@ -165,6 +172,9 @@ public class RegistersDetailPanel extends JPanel {
                 }
             }
         });
+
+
+
     }
 
 
@@ -342,6 +352,29 @@ public class RegistersDetailPanel extends JPanel {
             return this;
         }
 
+    }
+
+    private class VicSelectionActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton radio = (JRadioButton) e.getSource();
+            if (radio.getText().contains("VIC-II")) {
+                vicFilter = "VIC-II";
+                registersService.loadRegistersVic2();
+            }
+            if (radio.getText().contains("VIC-III")) {
+                vicFilter = "VIC-III";
+                registersService.loadRegistersVic3();
+            }
+            if (radio.getText().contains("VIC-IV")) {
+                vicFilter = "VIC-IV";
+                registersService.loadRegistersVic4();
+            }
+            String value = textRegister.getText().trim();
+            refreshRegister(value);
+            logger.info("Changed VIC-Filter to=" + vicFilter);
+        }
     }
 
 }

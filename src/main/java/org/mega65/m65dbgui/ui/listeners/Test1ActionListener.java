@@ -3,7 +3,9 @@ package org.mega65.m65dbgui.ui.listeners;
 import jakarta.inject.Inject;
 import org.mega65.m65dbgui.State;
 import org.mega65.m65dbgui.domain.Byte;
+import org.mega65.m65dbgui.domain.Register;
 import org.mega65.m65dbgui.services.MemoryService;
+import org.mega65.m65dbgui.services.RegistersService;
 import org.mega65.m65dbgui.util.Util;
 import org.slf4j.Logger;
 
@@ -17,10 +19,57 @@ public class Test1ActionListener implements ActionListener {
     Logger logger = Util.getLogger(Test1ActionListener.class);
 
     @Inject MemoryService memoryService;
+    @Inject RegistersService registersService;
     @Inject State state;
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        registersService.loadRegisters();
+        List<Register> r1 =registersService.getRegisters();
+        registersService.loadRegistersVic2();
+        List<Register> r2 =registersService.getRegisters();
+        registersService.loadRegistersVic3();
+        List<Register> r3 =registersService.getRegisters();
+        registersService.loadRegistersVic4();
+        List<Register> r4 =registersService.getRegisters();
+        logger.info("x");
+
+        /*
+        if ( (memoryService.peek("777D018") & 32) == 0  ) {
+           // ASSUME WE HAVE A C65
+            logger.info("assume we have a C65");
+            Long v1 = memoryService.peek("777D050");
+            Long v2 = memoryService.peek("777D050");
+            Long v3 = memoryService.peek("777D050");
+            logger.info ("v1 v2 v3 = " + v1 + " " + v2 + " " + v3);
+            if (v1!=v2 || v1!=v3 || v2!=v3) {
+                logger.info("VIC-IV");
+
+            }
+
+        } else {
+            logger.info("can be a C64 or a MEGA65");
+            memoryService.poke(Byte.parseByte("777D000", 1));
+            memoryService.poke(Byte.parseByte("777D02F", 71));
+            memoryService.poke(Byte.parseByte("777D02F", 83));
+
+            memoryService.poke(Util.fromHex("777D000") + 256, 0);
+            if (memoryService.peek("777D000")==1) {
+                logger.info("VIC-IV");
+            }
+
+            memoryService.poke(Byte.parseByte("777D000", 1));
+            memoryService.poke(Byte.parseByte("777D02F", 165));
+            memoryService.poke(Byte.parseByte("777D02F", 150));
+
+            memoryService.poke(Util.fromHex("777D000") + 256, 0);
+            if (memoryService.peek("777D000")==1) {
+                logger.info("VIC-III");
+            }
+            logger.info("VIC-II");
+        }
+*/
+
         //logger.info("stepping one cycle");
         //fireEvent(M65Trace.step());
 

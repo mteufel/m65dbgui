@@ -58,8 +58,8 @@ public class MainPanel extends JPanel {
         }
         title = "Lookup Registers";
         if (event.getType().equals(OpenViewEvent.TYPE_REGISTERS_DETAIL)  && !isTabOpen(title)) {
-            RegistersDetailPanel registersDetailPanel = (RegistersDetailPanel) DiUtil.create(RegistersDetailPanel.class);
-            UiUtil.createClosableTab(title, registersDetailPanel, mainTabbedPane, null);
+            RegistersLookupPanel registersLookupPanel = (RegistersLookupPanel) DiUtil.create(RegistersLookupPanel.class);
+            UiUtil.createClosableTab(title, registersLookupPanel, mainTabbedPane, null);
             activateTab(title);
         }
 
