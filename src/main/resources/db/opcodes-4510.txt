@@ -1,20 +1,3 @@
 OP,INSTRUCTION,SIZE,CYCLES,CYCLES_NOTES,ADDRESSING,COMPOUND
-00,BRK,1,7,,Imp,
-01,ORA,2,6,rp,BpX,
-02,CLE,1,1,,Imp,
-03,SEE,1,1,,Imp,
-04,TSB,2,3,r,Bp,
-05,ORA,2,3,r,Bp,42
-06,ASL,2,4,r,Bp,42
-07,RMB0,2,4,rb,Bp,
-08,PHP,1,2,,Imp,
-09,ORA,2,2,,Imm,
-0A,ASL,1,1,,Acc,42
-0B,TSY,1,1,,Imp,
-0C,TSB,3,5,r,Abs,
-0D,ORA,3,4,r,Abs,42
-0E,ASL,3,5,r,Abs,42
-0F,BBR0,3,0,rb,Bpr8,
-4C,JMP,3,3,,Abs,
-60,RTS,1,6,m,Imp,
-EE,INC,3,6,dmr,Abs,42
+D0,BNE        ,2   ,2     ,b           ,Rel       ,
+D3,BNE        ,3   ,3     ,b           ,Relfar    ,

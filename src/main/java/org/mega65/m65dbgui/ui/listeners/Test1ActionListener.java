@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import org.mega65.m65dbgui.State;
 import org.mega65.m65dbgui.domain.Byte;
 import org.mega65.m65dbgui.domain.Register;
+import org.mega65.m65dbgui.services.Disassembler;
 import org.mega65.m65dbgui.services.MemoryService;
 import org.mega65.m65dbgui.services.RegistersService;
 import org.mega65.m65dbgui.util.Util;
@@ -20,19 +21,14 @@ public class Test1ActionListener implements ActionListener {
 
     @Inject MemoryService memoryService;
     @Inject RegistersService registersService;
+    @Inject Disassembler dis;
     @Inject State state;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        registersService.loadRegisters();
-        List<Register> r1 =registersService.getRegisters();
-        registersService.loadRegistersVic2();
-        List<Register> r2 =registersService.getRegisters();
-        registersService.loadRegistersVic3();
-        List<Register> r3 =registersService.getRegisters();
-        registersService.loadRegistersVic4();
-        List<Register> r4 =registersService.getRegisters();
-        logger.info("x");
+
+        memoryService.poke( dis.createProgram2());
+
 
         /*
         if ( (memoryService.peek("777D018") & 32) == 0  ) {

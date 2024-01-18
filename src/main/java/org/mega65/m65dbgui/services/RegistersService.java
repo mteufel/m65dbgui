@@ -106,6 +106,7 @@ public class RegistersService {
                 regs.remove(idx);
                 regs.add(r);
             }
+            regs.add(r);
         });
 
         List<Register> onlyVic4 = load(); // load all
@@ -149,8 +150,16 @@ public class RegistersService {
                         String value = description.split("=")[1];
                         desc.put(key, value);
                     });
+                    String hexFrom = r[1].trim();
+                    String hexTo = r[1].trim();
+                    if (r[1].contains("-")) {
+                        hexFrom = r[1].trim().split("-")[0];
+                        hexTo = r[1].trim().split("-")[1];
+                    }
+                    for (long l = Util.fromHex(hexFrom); l <= Util.fromHex(hexTo) ; l++) {
+                        regs.add(new Register(r[0].trim(),Util.toHex(l),r[2].trim(),r[3].trim(),r[4].trim(),r[5].trim(),r[6].trim(),r[7].trim(),r[8].trim(),r[9].trim(), desc));
+                    }
 
-                    regs.add(new Register(r[0].trim(),r[1].trim(),r[2].trim(),r[3].trim(),r[4].trim(),r[5].trim(),r[6].trim(),r[7].trim(),r[8].trim(),r[9].trim(), desc));
                 }
                 line = reader.readLine();
             }

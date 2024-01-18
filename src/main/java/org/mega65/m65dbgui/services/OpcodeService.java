@@ -37,9 +37,9 @@ public class OpcodeService {
                 if (!line.startsWith("OP")) {
                     String[] s = line.split(",");
                     if (s.length==6) {
-                        opcode = new Opcode(s[0],s[1],Integer.parseInt(s[2]),Integer.parseInt(s[3]),s[4],loadAddressing(s[5]),"");
+                        opcode = new Opcode(s[0].trim(),s[1].trim(),Integer.parseInt(s[2].trim()),Integer.parseInt(s[3].trim()),s[4].trim(),loadAddressing(s[5].trim()),"");
                     } else {
-                        opcode = new Opcode(s[0],s[1],Integer.parseInt(s[2]),Integer.parseInt(s[3]),s[4],loadAddressing(s[5]),s[6]);
+                        opcode = new Opcode(s[0].trim(),s[1].trim(),Integer.parseInt(s[2].trim()),Integer.parseInt(s[3].trim()),s[4].trim(),loadAddressing(s[5].trim()),s[6].trim());
                     }
 
                     opcodes.add(opcode);
@@ -96,4 +96,15 @@ public class OpcodeService {
         }
     }
 
+    public Opcode getOpcodeByInstruction(String instruction) {
+        try {
+            return opcodes.stream().filter( e -> instruction.equals(e.getInstruction()) ).findFirst().get();
+        } catch (NoSuchElementException e) {
+            return new Opcode("","???",0,0,"",null,"");
+        }
+    }
+
+    public List<Opcode> getOpcodes() {
+        return opcodes;
+    }
 }

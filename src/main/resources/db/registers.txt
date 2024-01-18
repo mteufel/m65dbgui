@@ -59,8 +59,40 @@ VIC-II ,D030,-        ,-        ,-        ,-         ,-        ,-        ,-     
 ; ---------------------------------
 VIC-III,D020,BORDERCOL,BORDERCOL,BORDERCOL,BORDERCOL ,BORDERCOL,BORDERCOL,BORDERCOL ,BORDERCOL ,BORDERCOL=display border colour (256 colour)
 VIC-III,D021,SCREENCOL,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL,SCREENCOL,SCREENCOL ,SCREENCOL ,SCREENCOL=screen colour (256 colour)
-VIC-III,D030,ROME     ,CROM9    ,ROMC     ,ROMA      ,ROM8     ,PAL      ,EXTSYNC   ,CRAM2K   ,ROME=Map53272 C65 ROM $E000-$FFFF;CROM9=Select between C64 and C65 charset;ROMC=Map C65 ROM $C000-$CFFF;ROMA=Map C65 ROM $A000-$BFFF;ROM8=Map C65 ROM $8000-$9FFF;PAL=Use PALETTE ROM (0) or RAM (1) entries for colours 0 - 15;EXTSYNC=Enable external video sync (genlock input);CRAM2K=Map 2nd KB of colour RAM $DC00-$DFFF
+VIC-III,D022,MC1      ,MC1      ,MC1      ,MC1       ,MC1      ,MC1      ,MC1       ,MC1       ,MC1=multi-colour 1 (256 colour)
+VIC-III,D023,MC2      ,MC2      ,MC2      ,MC2       ,MC2      ,MC2      ,MC2       ,MC2       ,MC2=multi-colour 2 (256 colour)
+VIC-III,D024,MC3      ,MC3      ,MC3      ,MC3       ,MC3      ,MC3      ,MC3       ,MC3       ,MC3=multi-colour 3 (256 colour)
+VIC-III,D025,SPRMC0   ,SPRMC0   ,SPRMC0   ,SPRMC0    ,SPRMC0   ,SPRMC0   ,SPRMC0    ,SPRMC0    ,SPRMC0=Sprite multi-colour 0 (8-bit for selection of any palette colour)
+VIC-III,D026,SPRMC1   ,SPRMC1   ,SPRMC1   ,SPRMC1    ,SPRMC1   ,SPRMC1   ,SPRMC1    ,SPRMC1    ,SPRMC0=Sprite multi-colour 1 (8-bit for selection of any palette colour)
+VIC-III,D02F,KEY      ,KEY      ,KEY      ,KEY       ,KEY      ,KEY      ,KEY       ,KEY       ,KEY=Write $A5 then $96 to enable C65/VIC-III IO registers
+VIC-III,D030,ROME     ,CROM9    ,ROMC     ,ROMA      ,ROM8     ,PAL      ,EXTSYNC   ,CRAM2K    ,ROME=Map53272 C65 ROM $E000-$FFFF;CROM9=Select between C64 and C65 charset;ROMC=Map C65 ROM $C000-$CFFF;ROMA=Map C65 ROM $A000-$BFFF;ROM8=Map C65 ROM $8000-$9FFF;PAL=Use PALETTE ROM (0) or RAM (1) entries for colours 0 - 15;EXTSYNC=Enable external video sync (genlock input);CRAM2K=Map 2nd KB of colour RAM $DC00-$DFFF
+VIC-III,D031,H640     ,FAST     ,ATTR     ,BPM       ,V400     ,H1280    ,MONO      ,INT       ,H640=Enable C64 640 horizontal pixels / 80 column mode;FAST=Enable C65 FAST mode (∼3.5MHz);BPM=Bit-Plane Mode;V400=Enable 400 vertical pixels;H1280=Enable 1280 horizontal pixels (not implemented);MONO=Enable VIC-III MONO composite video output (colour if disabled);INT=Enable VIC-III interlaced mode
+VIC-III,D033,B0ADODD  ,B0ADODD  ,B0ADODD  ,-         ,B0ADEVN  ,B0ADEVN  ,B0ADEVN   ,-         ,B0ADODD=Bitplane 0 address odd lines;B0ADEVN=Bitplane 0 address even lines
+VIC-III,D034,B1ADODD  ,B1ADODD  ,B1ADODD  ,-         ,B1ADEVN  ,B1ADEVN  ,B1ADEVN   ,-         ,B1ADODD=Bitplane 1 address odd lines;B1ADEVN=Bitplane 1 address even lines
+VIC-III,D035,B2ADODD  ,B2ADODD  ,B2ADODD  ,-         ,B2ADEVN  ,B2ADEVN  ,B2ADEVN   ,-         ,B2ADODD=Bitplane 2 address odd lines;B2ADEVN=Bitplane 2 address even lines
+VIC-III,D036,B3ADODD  ,B3ADODD  ,B3ADODD  ,-         ,B3ADEVN  ,B3ADEVN  ,B3ADEVN   ,-         ,B3ADODD=Bitplane 3 address odd lines;B3ADEVN=Bitplane 3 address even lines
+VIC-III,D037,B4ADODD  ,B4ADODD  ,B4ADODD  ,-         ,B4ADEVN  ,B4ADEVN  ,B4ADEVN   ,-         ,B4ADODD=Bitplane 4 address odd lines;B4ADEVN=Bitplane 4 address even lines
+VIC-III,D038,B5ADODD  ,B5ADODD  ,B5ADODD  ,-         ,B5ADEVN  ,B5ADEVN  ,B5ADEVN   ,-         ,B5ADODD=Bitplane 5 address odd lines;B5ADEVN=Bitplane 5 address even lines
+VIC-III,D039,B6ADODD  ,B6ADODD  ,B6ADODD  ,-         ,B6ADEVN  ,B6ADEVN  ,B6ADEVN   ,-         ,B6ADODD=Bitplane 6 address odd lines;B6ADEVN=Bitplane 6 address even lines
+VIC-III,D03A,B7ADODD  ,B7ADODD  ,B7ADODD  ,-         ,B7ADEVN  ,B7ADEVN  ,B7ADEVN   ,-         ,B7ADODD=Bitplane 7 address odd lines;B7ADEVN=Bitplane 7 address even lines
+VIC-III,D03B,BPCOMP   ,BPCOMP   ,BPCOMP   ,BPCOMP    ,BPCOMP   ,BPCOMP   ,BPCOMP   ,BPCOMP     ,BPCOMP=Complement bitplane flags
+VIC-III,D03C,BPX      ,BPX      ,BPX      ,BPX       ,BPX      ,BPX      ,BPX      ,BPX        ,BPX=Bitplane X
+VIC-III,D03D,BPY      ,BPY      ,BPY      ,BPY       ,BPY      ,BPY      ,BPY      ,BPY        ,BPY=Bitplane Y
+VIC-III,D03E,HPOS     ,HPOS     ,HPOS     ,HPOS      ,HPOS     ,HPOS     ,HPOS     ,HPOS       ,HPOS=Bitplane X Offset
+VIC-III,D03F,VPOS     ,VPOS     ,VPOS     ,VPOS      ,VPOS     ,VPOS     ,VPOS     ,VPOS       ,VPOS=Bitplane Y Offset
+VIC-III,D040,B0PIX    ,B0PIX    ,B0PIX    ,B0PIX     ,B0PIX    ,B0PIX    ,B0PIX    ,B0PIX      ,B0PIX=Display Address Translater (DAT) Bitplane 0 port
+VIC-III,D041,B0PIX    ,B1PIX    ,B1PIX    ,B1PIX     ,B1PIX    ,B1PIX    ,B1PIX    ,B1PIX      ,B1PIX=Display Address Translater (DAT) Bitplane 1 port
+VIC-III,D042,B0PIX    ,B2PIX    ,B2PIX    ,B2PIX     ,B2PIX    ,B2PIX    ,B2PIX    ,B2PIX      ,B2PIX=Display Address Translater (DAT) Bitplane 2 port
+VIC-III,D043,B0PIX    ,B3PIX    ,B3PIX    ,B3PIX     ,B3PIX    ,B3PIX    ,B3PIX    ,B3PIX      ,B3PIX=Display Address Translater (DAT) Bitplane 3 port
+VIC-III,D044,B0PIX    ,B4PIX    ,B4PIX    ,B4PIX     ,B4PIX    ,B4PIX    ,B4PIX    ,B4PIX      ,B4PIX=Display Address Translater (DAT) Bitplane 4 port
+VIC-III,D045,B0PIX    ,B5PIX    ,B5PIX    ,B5PIX     ,B5PIX    ,B5PIX    ,B5PIX    ,B5PIX      ,B5PIX=Display Address Translater (DAT) Bitplane 5 port
+VIC-III,D046,B0PIX    ,B6PIX    ,B6PIX    ,B6PIX     ,B6PIX    ,B6PIX    ,B6PIX    ,B6PIX      ,B6PIX=Display Address Translater (DAT) Bitplane 6 port
+VIC-III,D047,B0PIX    ,B7PIX    ,B7PIX    ,B7PIX     ,B7PIX    ,B7PIX    ,B7PIX    ,B7PIX      ,B7PIX=Display Address Translater (DAT) Bitplane 7 port
+VIC-III,D100-D1FF,PALRED   ,PALRED   ,PALRED   ,PALRED    ,PALRED   ,PALRED   ,PALRED   ,PALRED     ,PALRED=red pal values (reversed nybl order)
+VIC-III,D200-D2FF,PALGREEN ,PALGREEN ,PALGREEN ,PALGREEN  ,PALGREEN ,PALGREEN ,PALGREEN ,PALGREEN   ,PALGREEN=green pal values (reversed nybl order)
+VIC-III,D300-D3FF,PALBLUE  ,PALBLUE  ,PALBLUE  ,PALBLUE   ,PALBLUE  ,PALBLUE  ,PALBLUE  ,PALBLUE    ,PALBLUE=blue pal values (reversed nybl order)
 ; ----------------------------------
 ; VIC-IV MEGA65 Registers
 ; ---------------------------------
 VIC-IV ,D049,SPRBPMEN ,SPRBPMEN ,SPRBPMEN ,SPRBPMEN  ,TBDRPOS  ,TBDRPOS  ,TBDRPOS   ,TBDRPOS  ,SPRBPMEN=Sprite bitplane-modify-mode enables;TBDRPOS=top border position
+

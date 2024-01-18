@@ -67,6 +67,9 @@ public class DisassemblyTableModel implements TableModel {
 
         Disassembly dis = disassembly.get(rowIndex);
 
+        if (dis==null)
+            return null;
+
         switch (columnIndex) {
             case 0: return Util.toHex(dis.adr());
             case 1: return dis.opcode().getOp();

@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import static org.mega65.m65dbgui.util.DiUtil.fireEvent;
 
@@ -93,10 +95,22 @@ public class MemorySelectionDialog extends JDialog {
 
         areaTable.setModel(areaTableModel);
         areaTable.setFocusable(false);
-        areaTable.setRowSelectionAllowed(false);
+        areaTable.setRowSelectionAllowed(true);
+        areaTable.setSelectionBackground(ColorHolder.getColor(ColorHolder.blue2));
         UiUtil.setColumnWidths(areaTable,100,100,90,480);
 
         areaTable.setDefaultRenderer(String.class, new CellRenederer());
+
+        areaTable.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    entryMade((String)areaTable.getValueAt(row,0));
+                }
+            }
+        });
 
 
         addressField.getDocument().addDocumentListener(new DocumentListener() {
@@ -131,33 +145,38 @@ public class MemorySelectionDialog extends JDialog {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    String msg = adressspaceService.checkEntry(addressField.getText().trim());
-                    String value = addressField.getText().trim().replace(".", "");
-                    if (value.length()==3) {
-                        value = value + "0000";
-                    }
-                    logger.info("value=" + value);
-                    if (msg.equals("ok")) {
-                        dispose();
-                        String title = ("RAM." + value.substring(0, 3) + "." + value.substring(3,4)).toUpperCase();
-                        String bank = value.substring(0, 3);
-                        String start = value.substring(3, value.length());
-                        String end = "ffff";
-
-                        logger.info("title=" + title);
-                        logger.info("offset=" + bank);
-                        logger.info("start=" + start);
-                        logger.info("end=" + end);
-
-                        fireEvent(new OpenMemoryViewerEvent(true, title, Util.fromHex(bank + "0000"), Util.fromHex(start), Util.fromHex(end), Util.fromHex(start), OpenMemoryViewerEvent.MODE_REFRESH_MANUAL));
-
-                    } else {
-                        info.setText(msg);
-                    }
+                    entryMade(addressField.getText());
                 }
             }
         });
 
+    }
+
+
+    private void entryMade(String entry) {
+        String msg = adressspaceService.checkEntry(entry.trim());
+        String value = entry.trim().replace(".", "");
+        if (value.length()==3) {
+            value = value + "0000";
+        }
+        logger.info("value=" + value);
+        if (msg.equals("ok")) {
+            dispose();
+            String title = ("RAM." + value.substring(0, 3) + "." + value.substring(3,4)).toUpperCase();
+            String bank = value.substring(0, 3);
+            String start = value.substring(3, value.length());
+            String end = "ffff";
+
+            logger.info("title=" + title);
+            logger.info("offset=" + bank);
+            logger.info("start=" + start);
+            logger.info("end=" + end);
+
+            fireEvent(new OpenMemoryViewerEvent(true, title, Util.fromHex(bank + "0000"), Util.fromHex(start), Util.fromHex(end), Util.fromHex(start), OpenMemoryViewerEvent.MODE_REFRESH_MANUAL));
+
+        } else {
+            info.setText(msg);
+        }
     }
 
     private class CellRenederer  extends DefaultTableCellRenderer {

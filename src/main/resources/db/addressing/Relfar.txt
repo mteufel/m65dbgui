@@ -1,0 +1,16 @@
+relfar
+16-bit relative
+Relative Word Addressing Mode
+This addressing mode is identical to Relative Addressing Mode, except that the ad-
+dress offset is a 16-bit value. This allows a relative branch or jump to any location in
+the current 64KB memory view. This makes it possible to write software that is fully
+relocatable, by avoiding the need for absolute addresses when calling routines.
+
+For example,
+
+BNE $3000
+
+would jump to $3000 if the Z flag of the process was not set. If this instruction were
+located at address $2002, it would be encoded as $D3 $FC $0F, i.e., branching to
++$FFC = 4,092 bytes following the second byte of the instruction. The fact that the
+instruction is 3 bytes long is ignored in this calculation.

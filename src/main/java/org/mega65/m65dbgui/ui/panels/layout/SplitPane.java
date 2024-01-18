@@ -13,7 +13,7 @@ public class SplitPane extends JSplitPane {
 
         setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         setOneTouchExpandable(false);
-        setDividerLocation(700);
+        setDividerLocation(800);
         setLayout(null);
         setLeftComponent(leftSplitPane);
         setRightComponent(rightPanel);

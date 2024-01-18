@@ -44,7 +44,7 @@ public class MainPanel extends JPanel {
             DisassemblyTable disassemblyTable = (DisassemblyTable) DiUtil.create(DisassemblyTable.class);
             M65Memory m65Memory = new M65Memory();
             m65Memory.setId(disassemblyTable.getId());
-            m65Memory.setAdr(0x2015);
+            m65Memory.setAdr(0x1000);
             UiUtil.createClosableTab(title, new JScrollPane(disassemblyTable), mainTabbedPane, null);
             state.executeOperation(m65Memory);
         }
