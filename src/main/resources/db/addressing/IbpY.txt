@@ -1,0 +1,17 @@
+ibpY
+(indirect),Y
+Base-Page Indirect Y-Indexed Mode
+This addressing mode differs from the X-Indexed Indirect modes, in that the Y Regis-
+ter is added to the address that is read from the pointer, instead of being added to
+the pointer. This is a very useful mode, that is frequently used because it effectively
+provides access to “the Y-th byte of the memory at the address pointed to by the
+operand.” That is, it de-references a pointer. The encoding for this addressing mode
+is identical to Base-Page Mode.
+
+For example, if the Y Register contains the value $04, and the memory locations $12
+and $13 in the current Base-Page contained $78 and $56, respectively, then
+
+LDA ( $12 ) , Y
+
+would read the contents of memory location $567C (i.e., $5678 + Y), and store the
+result in the A register. This instruction would be encoded as $B1 $12.

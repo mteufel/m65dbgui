@@ -1,0 +1,14 @@
+bpiX
+(indirect,X)
+Base-Page Indirect X-Indexed Mode
+This addressing mode is identical to Absolute Indirect X-Indexed Mode, except that the
+address of the pointer is formed from the Base-Page Register (high byte) and the 8-bit
+operand (low byte). The encoding for this addressing mode is identical to Base-Page
+Mode.
+For example, if the X Register contains the value $04, and the memory locations $16
+and $17 in the current Base-Page contained $34 and $12, respectively, then
+
+LDA ( $12 , X )
+
+would read the contents of memory location $1234, and store the result in the A
+register. This instruction would be encoded as $A1 $12.

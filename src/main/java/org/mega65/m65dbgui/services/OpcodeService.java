@@ -92,7 +92,7 @@ public class OpcodeService {
         try {
             return opcodes.stream().filter( e -> op.equals(e.getOp()) ).findFirst().get();
         } catch (NoSuchElementException e) {
-            return new Opcode("","???",0,0,"",null,"");
+            return getOpcodeByInstruction("BRK");
         }
     }
 

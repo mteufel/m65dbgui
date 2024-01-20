@@ -12,11 +12,11 @@ public class Relfar extends Addressing {
         Long relfar = disassembly.adr() + disassembly.opcode().getSize() + 1 + Util.fromHex(addr);
 
         if (numberFormat.equals("$")) {
-            return "BNE $" + Util.toHex(relfar, 4);
+            return "$" + Util.toHex(relfar, 4);
         }
 
         if (numberFormat.equals("#")) {
-            return "BNE #" + relfar;
+            return "#" + relfar;
         }
 
         return "???";

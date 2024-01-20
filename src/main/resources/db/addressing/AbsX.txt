@@ -1,0 +1,14 @@
+absX
+absolute,X
+Absolute X-Indexed Mode
+This mode is identical to Absolute Mode, except that the address is formed by taking
+the argument, and adding the value of the X Register to it. If the indexing causes the
+address to cross a page boundary, i.e., if the upper byte of the address changes, this
+may incur a 1 cycle penalty, depending on the processor mode and speed setting.
+The encoding for this addressing mode is identical to Absolute Mode. For example,
+the instruction
+
+LDA $1234 , X
+
+would read the memory location ($1234 + X), and place the value read from there
+into the A Register. This would be encoded as $BD $34 $12.

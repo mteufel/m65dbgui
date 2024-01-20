@@ -3,7 +3,7 @@ package org.mega65.m65dbgui.addressing;
 import org.mega65.m65dbgui.domain.Disassembly;
 import org.mega65.m65dbgui.util.Util;
 
-public class Bp extends Addressing {
+public class IbpY extends Addressing {
 
     @Override
     public String getInstruction(String numberFormat, Disassembly disassembly) {
@@ -18,7 +18,7 @@ public class Bp extends Addressing {
             result = "#" + disassembly.operand1();
         }
 
-        return result;
+        return "(" + result + "),Y";
 
     }
 }

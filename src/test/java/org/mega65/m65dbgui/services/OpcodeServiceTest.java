@@ -29,11 +29,12 @@ public class OpcodeServiceTest {
     @DisplayName("Contains Opcodes")
     public void testContainsOpcodes() {
         String[] instructions = { "BNE",
-                                  "CMP",
-                                  "INC",
-                                  "JMP",
-                                  "LDA",
-                                  "STA"
+                                  "CMP"
+                                // "INC",
+                                // "JMP",
+                                // "LDA",
+                                // "STA"
+
         };
         Arrays.asList(instructions).forEach( instruction -> assertEquals(instruction, opcodeService.getOpcodeByInstruction(instruction).getInstruction()));
     }

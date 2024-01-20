@@ -1,0 +1,13 @@
+indX
+(indirect,X)
+Absolute Indirect X-Indexed Mode
+In this mode, the 16-bit argument is the address that points to, i.e., contains the ad-
+dress of actual byte to read. It is identical to Absolute Indirect Mode, except that the
+value of the X Register is added to the pointer address. For example, if the X Register
+contains the value $04, memory location $1238 contains $78 and memory location
+$1239 contains $56, then
+
+JMP ( $1234 , X )
+
+would jump to address $5678. The encoding for this addressing mode is identical to
+Absolute Mode, and thus this instruction would be encoded as $7C $34 $12.

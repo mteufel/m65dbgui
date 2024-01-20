@@ -19,11 +19,11 @@ public class Rel extends Addressing {
         }
 
         if (numberFormat.equals("$")) {
-            return "BNE $" + Util.toHex(rel, 4);
+            return "$" + Util.toHex(rel, 4);
         }
 
         if (numberFormat.equals("#")) {
-            return "BNE #" + rel;
+            return "#" + rel;
         }
 
         return "???";

@@ -111,6 +111,7 @@ public class Disassembler {
     }
     public String getLine(int index) {
         Disassembly dis = disassemblies.get(index);
+        String assembly;
 
         String operand1 = "  ";
         if (dis.operand1() != null) {
@@ -120,12 +121,14 @@ public class Disassembler {
         if (dis.operand2() != null) {
             operand2 =  Util.toHex(dis.operand2(), 2);
         }
+        assembly = Util.toHex(dis.adr(),4) + " " +
+                   Util.toHex(dis.code(), 2) + " " +
+                   operand1 + " " +
+                   operand2 + "   " +
+                   dis.opcode().getInstruction() + " " +
+                   dis.opcode().getAdressing().getInstruction("$", dis);
 
-        return Util.toHex(dis.adr(),4) + " " +
-               Util.toHex(dis.code(), 2) + " " +
-                operand1 + " " +
-                operand2 + "   " +
-                dis.opcode().getAdressing().getInstruction("$", dis);
+        return assembly.trim();
 
     }
 

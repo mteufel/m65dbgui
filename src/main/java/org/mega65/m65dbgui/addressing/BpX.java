@@ -11,7 +11,7 @@ public class BpX extends Addressing {
         String result = "";
 
         if (numberFormat.equals("$")) {
-            result = "#$" + Util.toHex(disassembly.operand1());
+            result = "$" + Util.toHex(disassembly.operand1());
         }
 
         if (numberFormat.equals("#")) {
